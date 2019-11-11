@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: scaffold-eureka
+
+server:
+  port: 8001
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: false               #单机不需要自己也注册进去  默认为true
+    register-with-eureka: false        # 单机不需要获取注册信息 自己本身就是 默认为true
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+---
+spring:
+  application:
+    name: scaffold-eureka
+  profiles: server1
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: server1
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server2:8002/eureka/,http://server3:8003/eureka/
+
+---
+spring:
+  application:
+    name: scaffold-eureka
+  profiles: server2
+server:
+  port: 8002
+eureka:
+  instance:
+    hostname: server2
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8001/eureka/,http://server3:8003/eureka/
+
+---
+spring:
+  application:
+    name: scaffold-eureka
+  profiles: server3
+server:
+  port: 8003
+eureka:
+  instance:
+    hostname: server3
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8001/eureka/,http://server2:8002/eureka/

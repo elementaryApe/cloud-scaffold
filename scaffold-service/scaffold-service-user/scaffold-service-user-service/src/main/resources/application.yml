@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /scaffold-user
+
+spring:
+  application:
+    name: eureka-client-scaffold-user-service
+
+feign:
+  hystrix:
+    enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8001/eureka/
+
+

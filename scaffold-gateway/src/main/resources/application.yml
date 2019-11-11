@@ -1,0 +1,21 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: scaffold-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8001/eureka/ #,http://server2:8002/eureka/,http://server3:8003/eureka/
+
+zuul:
+  prefix: /scaffold
+  routes:
+    user:
+      path: /scaffold-user/**
+      serviceId: eureka-client-scaffold-user-service
+      strip-prefix: false
+    order:
+      path: /scaffold-order/**
+      serviceId: eureka-client-scaffold-order-service
+      strip-prefix: false
