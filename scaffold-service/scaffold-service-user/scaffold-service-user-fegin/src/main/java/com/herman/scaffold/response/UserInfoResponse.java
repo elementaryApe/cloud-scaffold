@@ -15,4 +15,7 @@ public class UserInfoResponse {
 
     private String userName;
     private Long userId;
+
+
+
 }

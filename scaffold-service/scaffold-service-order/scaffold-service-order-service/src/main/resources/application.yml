@@ -6,6 +6,13 @@ server:
 spring:
   application:
     name: eureka-client-scaffold-order-service
+  datasource:
+    # 配置数据源
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://47.97.75.100:3306/Guxi_GoGame_db?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&useSSL=true
+    username: root
+    password: guxikeji520
 
 eureka:
   client:

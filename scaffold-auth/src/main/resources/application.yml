@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-client-scaffold-auth-server
+
+
+server:
+  port: 9090
+  servlet:
+    context-path: /scaffold-auth-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:8001/eureka/

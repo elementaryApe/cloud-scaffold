@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: scaffold-gateway
+  redis:
+      host: 47.99.112.89
+      port: 6379
+      password: Zmq745210
+      database: 13
 eureka:
   client:
     service-url:
@@ -19,3 +24,24 @@ zuul:
       path: /scaffold-order/**
       serviceId: eureka-client-scaffold-order-service
       strip-prefix: false
+    token:
+      path: /scaffold-auth-server/**
+      serviceId: eureka-client-scaffold-auth-server
+      strip-prefix: false
+    resouces:
+      path: /scaffold-resouce-server/**
+      serviceId: eureka-scaffold-resource-server
+      strip-prefix: false
+
+  sensitive-headers:
+  ratelimit:
+      enabled: true
+      repository: REDIS
+      default-policy-list:
+      - limit: 200    #可选 - 每个刷新时间窗口对应的请求数量限制
+        quota: 20      #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+        refresh-interval: 30 # 刷新时间窗口的时间，默认值 (秒)
+        type:
+            - url
+            - httpmethod
+
