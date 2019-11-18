@@ -5,6 +5,7 @@ import com.herman.scaffold.model.UserInfo;
 import com.herman.scaffold.service.IUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,15 +26,17 @@ public class UserController {
 
 
     @GetMapping("{id}")
-    public Object getUserById(@PathVariable Long id) {
-        log.info("user-controller: getUserById ->{}", id);
+    public Object getUserById(@PathVariable Long id, @AuthenticationPrincipal String username) {
+        log.info("user-controller: getUserById  id->{}", id);
+        log.info("user-controller: getUserById  username->{}", username);
         UserInfo userInfo = userInfoService.getById(id);
         return UserInfo.assembleUserInfo(userInfo);
     }
 
     @GetMapping("order/{userId}")
-    public Object getUserOrder(@PathVariable Long userId) {
-        log.info("user-controller: getUserOrder ->{}", userId);
+    public Object getUserOrder(@PathVariable Long userId, @AuthenticationPrincipal String username) {
+        log.info("user-controller: getUserOrder userId->{}", userId);
+        log.info("user-controller: getUserOrder  username->{}", username);
         return orderServiceFeign.getOrderByUserId(userId);
     }
 }

@@ -17,6 +17,23 @@ spring:
 feign:
   hystrix:
     enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 60000
+
 
 eureka:
   client:
@@ -40,3 +57,11 @@ mybatis-plus:
   mapper-locations: classpath:/com/herman/scaffold/dao/mapper/*.xml
   typeAliasesPackage: com.herman.scaffold.model
 
+security:
+  oauth2:
+    client:
+      client-id: userService
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://127.0.0.1:9090/scaffold-auth-server/oauth/token_key

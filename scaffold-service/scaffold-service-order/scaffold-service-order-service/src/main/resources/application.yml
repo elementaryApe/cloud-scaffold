@@ -20,3 +20,11 @@ eureka:
       defaultZone: http://server1:8001/eureka/
 
 
+security:
+  oauth2:
+    client:
+      client-id: orderService
+      client-secret: 123456
+    resource:
+      jwt:
+        key-uri: http://127.0.0.1:9090/scaffold-auth-server/oauth/token_key

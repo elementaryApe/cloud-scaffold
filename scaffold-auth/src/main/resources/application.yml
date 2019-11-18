@@ -1,8 +1,21 @@
 spring:
   application:
     name: eureka-client-scaffold-auth-server
-
-
+  redis:
+    host: 47.99.112.89
+    port: 6379
+    password: Zmq745210
+    database: 13
+  datasource:
+   # 配置数据源
+      driver-class-name: com.mysql.jdbc.Driver
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:mysql://47.97.75.100:3306/Guxi_GoGame_db?characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false&useSSL=true
+      username: root
+      password: guxikeji520
+      hikari:
+        max-lifetime: 30000
+        minimum-idle: 3
 server:
   port: 9090
   servlet:

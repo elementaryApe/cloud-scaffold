@@ -18,7 +18,7 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public List<OrderResponse> getUserOrders(Long userId) {
-        if(userId==1L){
+        if(userId==10000){
             List<OrderResponse> list=new ArrayList<OrderResponse>();
             list.add(new OrderResponse(UUIDUtils.getUUID(),"第一个订单"));
             return list;

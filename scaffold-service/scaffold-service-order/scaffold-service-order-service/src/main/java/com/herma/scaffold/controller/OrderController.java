@@ -3,8 +3,11 @@ package com.herma.scaffold.controller;
 import com.herma.scaffold.service.IOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,9 +22,11 @@ public class OrderController {
     private IOrderService orderService;
 
     @GetMapping("{userId}")
-    public Object getOrderByUserId(@PathVariable Long userId) {
-        log.info("order-service: getOrderByUserId ->{}", userId);
-        if (userId == 1L) {
+//    @PreAuthorize("#oauth2.hasScope('write')")
+    public Object getOrderByUserId(@PathVariable Long userId, @AuthenticationPrincipal String username) {
+        log.info("order-service: getOrderByUserId userId->{}", userId);
+        log.info("order-service: getOrderByUserId username->{}", username);
+        if (userId == 10000) {
             return orderService.getUserOrders(userId);
         }
         return null;

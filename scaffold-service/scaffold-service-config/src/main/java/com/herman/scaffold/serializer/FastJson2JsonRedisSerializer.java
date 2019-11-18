@@ -1,6 +1,7 @@
 package com.herman.scaffold.serializer;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.SerializationException;
@@ -14,7 +15,6 @@ import java.nio.charset.Charset;
  * @author hsh
  * @create 2019-11-16 22:05
  **/
-@Component
 public class FastJson2JsonRedisSerializer <T> implements RedisSerializer<T> {
 
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
@@ -24,6 +24,12 @@ public class FastJson2JsonRedisSerializer <T> implements RedisSerializer<T> {
         super();
         this.clazz = clazz;
     }
+    static {
+//        ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
+//        ParserConfig.getGlobalInstance().addAccept("com.herman.oascloud");
+
+    }
+
 
     @Nullable
     @Override

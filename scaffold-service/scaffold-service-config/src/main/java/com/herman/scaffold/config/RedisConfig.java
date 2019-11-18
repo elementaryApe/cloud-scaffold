@@ -1,11 +1,11 @@
 package com.herman.scaffold.config;
 
+import com.herman.scaffold.serializer.FastJson2JsonRedisSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -18,19 +18,19 @@ public class RedisConfig {
     @Autowired
     private RedisConnectionFactory factory;
 
-    @Autowired
-    private RedisSerializer fastJson2JsonRedisSerializer;
 
-    @Bean(name = "redisTemplate")
-    public RedisTemplate<String, Object> fastJsonRedisTemplate() {
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate() {
+        FastJson2JsonRedisSerializer fastJsonRedisSerializer = new FastJson2JsonRedisSerializer(Object.class);
+
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
         template.setConnectionFactory(factory);
         //redis开启事务
         template.setEnableTransactionSupport(true);
         template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(fastJson2JsonRedisSerializer);
+        template.setValueSerializer(fastJsonRedisSerializer);
         template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashValueSerializer(fastJson2JsonRedisSerializer);
+        template.setHashValueSerializer(fastJsonRedisSerializer);
         template.setDefaultSerializer(new StringRedisSerializer());
         template.afterPropertiesSet();
         return template;
